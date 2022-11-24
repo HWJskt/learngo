@@ -1,6 +1,8 @@
 package mydict
 
-import "errors"
+import (
+	"errors"
+)
 
 // Dictionary type 이다. struct type 이 아니다
 type Dictionary map[string]string
@@ -37,4 +39,34 @@ func (d Dictionary) Add(word, def string) error {
 		return errWordExists
 	}
 	return nil
+}
+
+var errCantUpdate = errors.New("cant update non-existing word")
+
+func (d Dictionary) Update(word, definition string) error {
+	//단어가 있는지 찾아보고
+	_, err := d.Search((word))
+
+	// 단어가 있으면 변경하고, 없으면 오류 호출
+	switch err {
+	case errNotFound:
+		return errCantUpdate
+	case nil:
+		d[word] = definition
+	}
+	return nil
+}
+
+var errCantDelete = errors.New("cant delete non-existing word")
+
+func (d Dictionary) Delete(word string) error {
+	_, err := d.Search((word))
+	switch err {
+	case errNotFound:
+		return errCantDelete
+	case nil:
+		delete(d, word)
+	}
+	return nil
+
 }
