@@ -16,4 +16,20 @@ func main() {
 	// account.balance = 1000 //이거 안된다. 왜냐하면 balance는 account.go에서 func정의할때 priviate로 만들었으니까
 	fmt.Println(account)
 
+	account.Deposit(10)
+	fmt.Println(account.Balance())
+
+	// error handling 하는법
+	err := account.Withdraw(20)
+	if err != nil {
+		// log.Fatalln(err)
+		fmt.Println(err)
+	}
+	fmt.Println(account.Balance(), account.Owner())
+
+	account.ChangeOwner("lynn")
+	fmt.Println(account.Balance(), account.Owner())
+
+	fmt.Println(account)
+
 }
