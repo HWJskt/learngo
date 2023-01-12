@@ -7,7 +7,6 @@ folder 안의 모든 파일 중  main function은 하나만 있어야 한다.
 main이라는 package는 프로그램의 시작점을 포함하고 있다는 의미
 프로그램은 main package하나와 다른 package들로 이루어져 있다.
 */
-
 package main
 
 // 외부 package를 가져온다
